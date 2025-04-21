@@ -1,8 +1,6 @@
-
 import pickle
 import pandas as pd
 import streamlit as st
-import webbrowser
 
 # --- Page Config ---
 st.set_page_config(page_title="Movie Recommender", layout="centered")
@@ -95,6 +93,6 @@ if st.session_state.logged_in:
     if st.button("🔍 Search on YouTube"):
         if custom_movie.strip():
             search_url = f"https://www.youtube.com/results?search_query={custom_movie.replace(' ', '+')}+trailer"
-            webbrowser.open_new_tab(search_url)
+            st.markdown(f"[🔗 Click here to watch on YouTube]({search_url})", unsafe_allow_html=True)
         else:
             st.warning("Please enter a movie name before searching.")
