@@ -1,6 +1,7 @@
 import pickle
 import pandas as pd
 import streamlit as st
+from streamlit_js_eval import streamlit_js_eval
 
 # --- Page Config ---
 st.set_page_config(page_title="Movie Recommender", layout="centered")
@@ -19,10 +20,6 @@ st.markdown("""
     .movie {
         font-size: 20px;
         margin-bottom: 10px;
-    }
-    .youtube-link {
-        font-size: 16px;
-        color: #e50914;
     }
     </style>
 """, unsafe_allow_html=True)
@@ -88,11 +85,8 @@ if st.session_state.logged_in:
 
     # --- Custom YouTube Search ---
     st.subheader("🔎 Want to search your favourite movie?")
-    custom_movie = st.text_input("Enter movie name to search on YouTube")
 
-    if st.button("🔍 Search on YouTube"):
-        if custom_movie.strip():
-            search_url = f"https://www.youtube.com/results?search_query={custom_movie.replace(' ', '+')}+trailer"
-            st.markdown(f"[🔗 Click here to watch on YouTube]({search_url})", unsafe_allow_html=True)
-        else:
-            st.warning("Please enter a movie name before searching.")
+    if "custom_movie" not in st.session_state:
+        st.session_state.custom_movie = ""
+    if "confirm_search" not in st.session_state:
+        st.session
